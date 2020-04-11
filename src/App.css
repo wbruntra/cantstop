@@ -1,0 +1,28 @@
+.App {
+  text-align: center;
+}
+
+.box {
+  min-height: 50px;
+}
+
+.number {
+  min-height: 60px;
+  border: 1px solid black;
+  padding-top: 12px;
+}
+
+.selected {
+  background-color: red;
+}
+
+
+
+@keyframes App-logo-spin {
+  from {
+    transform: rotate(0deg);
+  }
+  to {
+    transform: rotate(360deg);
+  }
+}
