@@ -7,9 +7,8 @@
 }
 
 .number {
-  min-height: 60px;
   border: 1px solid black;
-  padding-top: 12px;
+  font-size: 1.3em;
 }
 
 .selected {
