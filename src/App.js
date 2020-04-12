@@ -2,6 +2,21 @@ import React, { useState } from 'react'
 import './App.css'
 import _ from 'lodash'
 import sums from './sums'
+import counter from './counter.json'
+
+const alternateCount = (selected) => {
+  let count = 0
+  let total = 0
+  _.forEach(counter, (value, key) => {
+    total = total + value
+    const sums = JSON.parse(key)
+    const common = _.intersection(sums, selected)
+    if (!_.isEmpty(common)) {
+      count = count + value
+    }
+  })
+  return count/total
+}
 
 const countSums = (selected) => {
   if (_.isEmpty(selected)) {
@@ -32,7 +47,11 @@ function App() {
     setSelected(newSelected)
   }
 
-  const p = countSums(selected)
+  const p = alternateCount(selected)
+  const altP = countSums(selected)
+  if (p !== altP) {
+    console.log('Functions do not match!')
+  }
 
   return (
     <div className="container">
