@@ -29,7 +29,7 @@ function App() {
       <div className="my-4">
         <h1>Don't Stop Tool</h1>
       </div>
-      <div className="row my-2">
+      {/* <div className="row my-2">
         <div className="col">
           <button
             onClick={() => {
@@ -40,7 +40,7 @@ function App() {
             Reset
           </button>
         </div>
-      </div>
+      </div> */}
 
       <div className="row text-center mb-3">
         {nums.map((i) => {
