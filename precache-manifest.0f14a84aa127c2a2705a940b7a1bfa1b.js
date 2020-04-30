@@ -1,10 +1,10 @@
 self.__precacheManifest = (self.__precacheManifest || []).concat([
   {
-    "revision": "d0e52d0496c00e40d736a82890aba76a",
+    "revision": "1c28612853b3f3638bc9878c45362452",
     "url": "/cantstop/index.html"
   },
   {
-    "revision": "5dca6aa50f343095284f",
+    "revision": "9939044531e4f17d90ab",
     "url": "/cantstop/static/css/main.d0ced13b.chunk.css"
   },
   {
@@ -16,8 +16,8 @@ self.__precacheManifest = (self.__precacheManifest || []).concat([
     "url": "/cantstop/static/js/2.8bc4a640.chunk.js.LICENSE.txt"
   },
   {
-    "revision": "5dca6aa50f343095284f",
-    "url": "/cantstop/static/js/main.d9104d96.chunk.js"
+    "revision": "9939044531e4f17d90ab",
+    "url": "/cantstop/static/js/main.676286d1.chunk.js"
   },
   {
     "revision": "baa8732d16be38b5f1b7",
