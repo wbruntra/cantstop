@@ -1,0 +1,35 @@
+
+@import './variables';
+@import 'bootstrap/scss/bootstrap.scss';
+
+.change-text {
+  cursor: pointer;
+}
+
+body {
+  font-family: 'Fira Sans';
+  background-color: $background;
+  color: $mainText;
+}
+
+.box {
+  min-height: 50px;
+}
+
+.number {
+  border: 1px solid $mainText;
+  
+  @include media-breakpoint-up(md) {
+    font-size: 1.3em;
+  }
+
+
+}
+
+.selected {
+  background-color: $other;
+}
+
+.white {
+  color: $mainText;
+}
