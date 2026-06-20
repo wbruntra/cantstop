@@ -1,35 +1,23 @@
 import React, { useMemo, useState } from 'react'
 
-import { calculateCommonElementRatio, countSums } from './utils'
+import { calculateCommonElementRatio, COLUMNS, toPercent } from './utils'
 
 function App() {
-  const nums = Array.from({ length: 11 }, (_, i) => i + 2)
   const [selected, setSelected] = useState([])
 
   const toggleBox = (n) => {
-    let newSelected
     if (selected.includes(n)) {
-      newSelected = selected.filter((x) => x !== n)
-    } else {
-      newSelected = [...selected, n]
+      setSelected(selected.filter((x) => x !== n))
+    } else if (selected.length < 2) {
+      setSelected([...selected, n])
     }
-    setSelected(newSelected)
   }
 
   const p = calculateCommonElementRatio(selected)
-  const altP = countSums(selected)
-  if (p !== altP) {
-    console.log('Functions do not match!')
-  }
-
   const showOptions = selected.length === 2
-  const unselected = nums.filter((n) => !selected.includes(n))
+  const unselected = COLUMNS.filter((n) => !selected.includes(n))
 
-  const toPercent = (p) => {
-    return `${(100 * p).toString().slice(0, 4)}%`
-  }
-
-  const seriesProbabilites = useMemo(() => {
+  const seriesProbabilities = useMemo(() => {
     const series = []
     for (let i = 1; i < 6; i++) {
       series.push(p ** i)
@@ -52,12 +40,10 @@ function App() {
         </button>
       </div>
 
-      <h3 className="my-2">
-        Success Probability: {`${(100 * p).toString().slice(0, 4)}%`}
-      </h3>
+      <h3 className="my-2">Success Probability: {toPercent(p)}</h3>
 
       <div className="num-grid">
-        {nums.map((i) => {
+        {COLUMNS.map((i) => {
           let optionProb
           if (showOptions && unselected.includes(i)) {
             optionProb = calculateCommonElementRatio([...selected, i])
@@ -83,7 +69,7 @@ function App() {
 
       <h4 className="mt-2">Streak Odds</h4>
       <div className="streak-grid">
-        {seriesProbabilites.map((prob, i) => {
+        {seriesProbabilities.map((prob, i) => {
           return (
             <div key={`streak-${i}`} className="streak-box">
               <div className="streak-num">{i + 1}</div>

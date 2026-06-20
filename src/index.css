@@ -198,6 +198,13 @@ input[type="text"]:focus {
   border-color: var(--highlight);
 }
 
+/* ---- Error text ---- */
+.error-text {
+  color: var(--highlight);
+  font-size: 0.8rem;
+  margin: 0.5rem 0;
+}
+
 /* ---- Score display ---- */
 .score-row {
   margin: 1rem 0;
