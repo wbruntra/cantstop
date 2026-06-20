@@ -92,11 +92,16 @@ function App() {
         })}
       </div>
       <div className="row mt-3">
-        <h4>Streak Odds</h4>
+        <h4 className='my-2'>Streak Odds</h4>
         {seriesProbabilites.map((prob, i) => {
           return (
-            <div className="col number">
-              <div className="d-flex flex-column justify-content-center align-items-center">
+            <div
+              style={{
+                fontSize: '.9rem',
+              }}
+              className="col-2"
+            >
+              <div className="d-flex flex-column justify-content-center align-items-center number">
                 <div>{`${i + 1}`}</div>
                 <div>{toPercent(prob)}</div>
               </div>
