@@ -2,6 +2,50 @@ import counter from './counter.json'
 
 export const COLUMNS = Array.from({ length: 11 }, (_, i) => i + 2)
 
+// Precompute for simulation sampling
+const ROLL_ENTRIES = Object.entries(counter).map(([key, weight]) => ({
+  sums: JSON.parse(key),
+  weight,
+}))
+const TOTAL_WEIGHT = ROLL_ENTRIES.reduce((acc, r) => acc + r.weight, 0)
+
+function sampleRoll() {
+  let r = Math.random() * TOTAL_WEIGHT
+  for (const roll of ROLL_ENTRIES) {
+    r -= roll.weight
+    if (r < 0) return roll.sums
+  }
+  return ROLL_ENTRIES[ROLL_ENTRIES.length - 1].sums
+}
+
+/**
+ * Simulate one turn: keep rolling until bust, counting advances on targetCol.
+ * columns is the set of 3 active columns that prevent busting.
+ * Returns a histogram array of length 6 where index n = number of trials
+ * ending with exactly n advances on targetCol (index 5 = 5 or more).
+ */
+export function simulateColumn(targetCol, columns, trials = 1000) {
+  const histogram = [0, 0, 0, 0, 0, 0]
+
+  for (let t = 0; t < trials; t++) {
+    let adv = 0
+    let busted = false
+
+    while (!busted) {
+      const sums = sampleRoll()
+      if (!columns.some((c) => sums.includes(c))) {
+        busted = true
+      } else if (sums.includes(targetCol)) {
+        adv++
+      }
+    }
+
+    histogram[Math.min(adv, 5)]++
+  }
+
+  return histogram
+}
+
 const COLUMN_HEIGHT = (n) => Math.abs(n - 7) + 1
 
 /**
