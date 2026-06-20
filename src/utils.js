@@ -1,4 +1,3 @@
-import _ from 'lodash'
 import sums from './sums'
 import counter from './counter.json'
 
@@ -12,11 +11,11 @@ import counter from './counter.json'
 export const calculateCommonElementRatio = (selected) => {
   let count = 0
   let total = 0
-  _.forEach(counter, (value, key) => {
+  Object.entries(counter).forEach(([key, value]) => {
     total = total + value
     const sums = JSON.parse(key)
-    const common = _.intersection(sums, selected)
-    if (!_.isEmpty(common)) {
+    const common = sums.filter((x) => selected.includes(x))
+    if (common.length > 0) {
       count = count + value
     }
   })
@@ -24,14 +23,14 @@ export const calculateCommonElementRatio = (selected) => {
 }
 
 export const countSums = (selected) => {
-  if (_.isEmpty(selected)) {
+  if (selected.length === 0) {
     return 0
   }
   let count = 0
   let common
   for (let i = 0; i < sums.length; i++) {
-    common = _.intersection(sums[i], selected)
-    if (!_.isEmpty(common)) {
+    common = sums[i].filter((x) => selected.includes(x))
+    if (common.length > 0) {
       count++
     }
   }
@@ -44,13 +43,11 @@ const getValue = (n) => {
 
 export const calculateScore = (advances) => {
   let score = 0
-  const marked = Object.keys(
-    _.omitBy(advances, (value, n) => {
-      return value === 0
-    }),
-  ).map((k) => Number(k))
+  const marked = Object.entries(advances)
+    .filter(([, value]) => value !== 0)
+    .map(([key]) => Number(key))
   // console.log(marked)
-  _.forEach(advances, (value, n) => {
+  Object.entries(advances).forEach(([n, value]) => {
     if (value > 0) {
       score = score + getValue(n)
       score = score + getValue(n) * value
@@ -79,7 +76,7 @@ export const calculateScore = (advances) => {
 }
 
 export const resetAdvances = () => {
-  const nums = _.range(2, 13)
+  const nums = Array.from({ length: 11 }, (_, i) => i + 2)
   const advances = {}
   nums.forEach((n) => {
     advances[n] = 0

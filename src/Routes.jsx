@@ -12,7 +12,7 @@ export default function Routes() {
 
   return (
     <div>
-      <p className="p-4 change-text" onClick={switcher}>
+      <p className="change-text" onClick={switcher}>
         Change
       </p>
       {scorer ? <Scorer /> : <App />}

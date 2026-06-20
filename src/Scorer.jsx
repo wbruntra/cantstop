@@ -1,9 +1,8 @@
 import React, { useState } from 'react'
-import { Link } from 'react-router-dom'
 
-import _ from 'lodash'
+import { calculateScore, interpretCode } from './utils'
 
-import { calculateCommonElementRatio, countSums, calculateScore, interpretCode } from './utils'
+const nums2to12 = Array.from({ length: 11 }, (_, i) => i + 2)
 
 const testResults = [
   { code: '2271t1', result: 28 },
@@ -16,16 +15,14 @@ const testResults = [
 ]
 
 const resetAdvances = () => {
-  const nums = _.range(2, 13)
   const advances = {}
-  nums.forEach((n) => {
+  nums2to12.forEach((n) => {
     advances[n] = 0
   })
   return advances
 }
 
 function Scorer() {
-  const nums = _.range(2, 13)
   const [advances, setAdvances] = useState(resetAdvances())
   const [score, setScore] = useState(0)
   const [encoded, setEncoded] = useState('')
@@ -38,7 +35,7 @@ function Scorer() {
   }
 
   const handleClick = (n) => {
-    let newAdvances = _.cloneDeep(advances)
+    let newAdvances = structuredClone(advances)
     newAdvances[n] = newAdvances[n] + 1
     setAdvances(newAdvances)
     const newScore = calculateScore(newAdvances)
@@ -46,57 +43,52 @@ function Scorer() {
   }
 
   return (
-    <div className="container">
-      <div className="my-4">
-        <h1>Don't Stop Tool (Rule of 28)</h1>
-      </div>
-      <div className="row my-2">
-        <div className="col">
-          <button
-            onClick={() => {
-              setEncoded('')
-              setAdvances(resetAdvances())
-              setScore(0)
-            }}
-            className="btn btn-primary"
-          >
-            Reset
-          </button>
-        </div>
-        <div className="col">
-          <form onSubmit={handleSubmit}>
-            <input type="text" onChange={(e) => setEncoded(e.target.value)} />
-            <input type="submit" hidden />
-          </form>
-        </div>
+    <div>
+      <h1 className="my-2">Don't Stop Tool (Rule of 28)</h1>
+
+      <div className="action-row my-2">
+        <button
+          onClick={() => {
+            setEncoded('')
+            setAdvances(resetAdvances())
+            setScore(0)
+          }}
+          className="btn"
+        >
+          Reset
+        </button>
+        <form onSubmit={handleSubmit}>
+          <input
+            type="text"
+            placeholder="code"
+            value={encoded}
+            onChange={(e) => setEncoded(e.target.value)}
+          />
+          <input type="submit" hidden />
+        </form>
       </div>
 
-      <div className="row text-center mb-3">
-        {nums.map((i) => {
+      <div className="num-grid">
+        {nums2to12.map((i) => {
           return (
             <div
               onClick={() => {
                 handleClick(i)
               }}
               key={`num-${i}`}
-              className={`col-3 my-4`}
+              className="num-cell"
             >
-              <div className={`p-3 number my-auto`}>
-                <div className="row text-center">
-                  <div className="col">{i}</div>
-                </div>
-                <div className="row text-center">
-                  <div className="text-center mx-auto">{advances[i]}</div>
-                </div>
+              <div className="num-box">
+                <div className="num-value">{i}</div>
+                <div className="num-sub">{advances[i]}</div>
               </div>
             </div>
           )
         })}
       </div>
-      <div className="row">
-        <div className="col">
-          <h3>Score: {score}</h3>
-        </div>
+
+      <div className="score-row">
+        <h3>Score: {score}</h3>
       </div>
     </div>
   )
