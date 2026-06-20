@@ -1,8 +1,21 @@
-# React + Vite
+# Can't Stop Tool
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+A companion tool for the [Can't Stop](https://boardgamegeek.com/boardgame/41/cant-stop) board game, built with Preact and Vite.
 
-Currently, two official plugins are available:
+## Tech Stack
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react/README.md) uses [Babel](https://babeljs.io/) for Fast Refresh
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
+- [Preact](https://preactjs.com/) — fast 3kB alternative to React
+- [Vite](https://vite.dev/) — build tool and dev server
+- [ESLint](https://eslint.org/) — linting with flat config
+- [Bun](https://bun.sh/) — package manager (`bun.lock`)
+- [gh-pages](https://github.com/tschaub/gh-pages) — deploy `dist/` to GitHub Pages
+
+## Scripts
+
+| Command | Description |
+|---------|-------------|
+| `bun run dev` | Start dev server with HMR |
+| `bun run build` | Production build to `dist/` |
+| `bun run lint` | Run ESLint |
+| `bun run preview` | Preview production build locally |
+| `bun run deploy` | Deploy `dist/` to gh-pages |
