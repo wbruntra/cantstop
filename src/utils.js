@@ -24,7 +24,7 @@ export const calculateCommonElementRatio = (selected) => {
   return count / total
 }
 
-export const toPercent = (p) => `${Math.round(p * 10000) / 100}%`
+export const toPercent = (p) => `${Math.round(p * 100)}%`
 
 export const calculateScore = (advances) => {
   let score = 0

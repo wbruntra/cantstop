@@ -1,4 +1,4 @@
-import React, { useState } from 'react'
+import { useState } from 'preact/hooks'
 
 import { calculateScore, interpretCode, resetAdvances, COLUMNS } from './utils'
 

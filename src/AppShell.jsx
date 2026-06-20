@@ -1,4 +1,4 @@
-import React, { useState } from 'react'
+import { useState } from 'preact/hooks'
 
 import Scorer from './Scorer'
 import App from './App'

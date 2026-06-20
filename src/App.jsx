@@ -1,4 +1,4 @@
-import React, { useMemo, useState } from 'react'
+import { useMemo, useState } from 'preact/hooks'
 
 import { calculateCommonElementRatio, COLUMNS, toPercent } from './utils'
 
