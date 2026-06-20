@@ -8,13 +8,13 @@ function App() {
   const toggleBox = (n) => {
     if (selected.includes(n)) {
       setSelected(selected.filter((x) => x !== n))
-    } else if (selected.length < 2) {
+    } else {
       setSelected([...selected, n])
     }
   }
 
   const p = calculateCommonElementRatio(selected)
-  const showOptions = selected.length === 2
+  const showOptions = selected.length > 0 && selected.length < 3
   const unselected = COLUMNS.filter((n) => !selected.includes(n))
 
   const seriesProbabilities = useMemo(() => {
